@@ -8,9 +8,9 @@ class Program
 
         var context = new ArtistsContext();
 
-        //create a new employee
-        var employee = new Employee{FirstName="Luke", LastName="Sheldon", Age=18};
-        context.Employees.Add(employee);
+        //fetch the first employee from the employees table
+        var employee = context.Employees.FirstOrDefault();
+        employee.FirstName="Blessing";
 
         context.ChangeTracker.DetectChanges();
         Console.WriteLine(context.ChangeTracker.DebugView.LongView);
