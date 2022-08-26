@@ -37,3 +37,7 @@ INSERT INTO Albums values(3,'Fixated on you',4000,1);
 
 COMMIT;
 EOF
+
+
+
+
