@@ -9,7 +9,7 @@ class Program{
 
         //fetch the first employee from the employees table
         var employee = context.Employees.FirstOrDefault();
-        employee.FirstName="Mark";
+        context.Employees.Remove(employee);
 
         //save all changes made in this context to the database
         context.SaveChanges();
