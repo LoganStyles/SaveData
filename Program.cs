@@ -7,11 +7,10 @@ class Program{
 
         var context = new ArtistsContext();
 
-        //create new instance of employee
-        var employee = new Employee{ FirstName="Susan", LastName="Fredricks", Age=28};
+        //fetch the first employee from the employees table
+        var employee = context.Employees.FirstOrDefault();
+        employee.FirstName="Mark";
 
-        //begin tracking the Employee entity
-        context.Employees.Add(employee);
         //save all changes made in this context to the database
         context.SaveChanges();
     }
