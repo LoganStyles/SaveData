@@ -15,13 +15,7 @@ namespace SaveData
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder
-                    .UseSqlite("data source=output/Artists.db")
-                    .LogTo(
-                        Console.WriteLine,
-                        new[] { DbLoggerCategory.Database.Command.Name },
-                        Microsoft.Extensions.Logging.LogLevel.Information
-                    );
+                optionsBuilder.UseSqlite("data source=output/Artists.db");
             }
         }
 

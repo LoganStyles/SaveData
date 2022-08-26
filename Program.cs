@@ -10,7 +10,9 @@ class Program
 
         //fetch the first employee from the employees table
         var employee = context.Employees.FirstOrDefault();
-        employee.FirstName="Mark";
+
+        context.ChangeTracker.DetectChanges();
+        Console.WriteLine(context.ChangeTracker.DebugView.LongView);
 
         //save all changes made in this context to the database
         context.SaveChanges();
