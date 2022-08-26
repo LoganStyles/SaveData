@@ -18,14 +18,14 @@ CREATE TABLE "Albums" (
     "Id" INTEGER NOT NULL CONSTRAINT "PK_Albums" PRIMARY KEY AUTOINCREMENT,
     "Title" TEXT NULL,
     "Price" REAL NOT NULL,
-    "EmployeeId" INTEGER NULL,
-    CONSTRAINT "FK_Albums_Employees_EmployeeId" FOREIGN KEY ("EmployeeId") REFERENCES "Employees" ("Id")
+    "EmployeeId" INTEGER NOT NULL,
+    CONSTRAINT "FK_Albums_Employees_EmployeeId" FOREIGN KEY ("EmployeeId") REFERENCES "Employees" ("Id") ON DELETE CASCADE
 );
 
 CREATE INDEX "IX_Albums_EmployeeId" ON "Albums" ("EmployeeId");
 
 INSERT INTO "__EFMigrationsHistory" ("MigrationId", "ProductVersion")
-VALUES ('20220826052038_EmployeeAlbumSetup', '6.0.2');
+VALUES ('20220826123800_InitialMigration', '6.0.2');
 
 INSERT INTO Employees values(1,'Max','Bello',25);
 INSERT INTO Employees values(2,'Francis','Ojukwu',34);
