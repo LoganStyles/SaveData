@@ -6,14 +6,11 @@ class Program
     public static void Main(string[] args)
     {
 
+        var disconnectedEmployee = new Employee { Id = 4, FirstName = "Femi", LastName = "Landon", Age = 34 };
         var context = new ArtistsContext();
 
-        //fetch the first employee from the employees table
-        var employee = context.Employees.FirstOrDefault();
-        context.Employees.Remove(employee);
-
-        context.ChangeTracker.DetectChanges();
-        Console.WriteLine(context.ChangeTracker.DebugView.LongView);
+        //check its state
+        Console.Write(context.Entry(disconnectedEmployee).State);
 
         //save all changes made in this context to the database
         context.SaveChanges();
