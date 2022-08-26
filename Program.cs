@@ -10,7 +10,7 @@ class Program
 
         //fetch the first employee from the employees table
         var employee = context.Employees.FirstOrDefault();
-        employee.FirstName="Blessing";
+        context.Employees.Remove(employee);
 
         context.ChangeTracker.DetectChanges();
         Console.WriteLine(context.ChangeTracker.DebugView.LongView);
