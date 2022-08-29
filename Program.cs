@@ -10,7 +10,9 @@ class Program
         var context = new ArtistsContext();
 
         //check its state
-        Console.Write(context.Entry(disconnectedEmployee).State);
+        Console.WriteLine("Employee {0} is in {1} state", 
+        disconnectedEmployee.FirstName, 
+        context.Entry(disconnectedEmployee).State);
 
         //save all changes made in this context to the database
         context.SaveChanges();
