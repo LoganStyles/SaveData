@@ -14,6 +14,7 @@ class Program
 
         //begin tracking the Employee entity
         context.Employees.Add(employee);
+        // context.Add<Employee>(employee);
         //save all changes made in this context to the database
         context.SaveChanges();
     }
