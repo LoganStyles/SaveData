@@ -8,19 +8,17 @@ class Program
 
         var disconnectedEmployee = new Employee
         {
-            FirstName = "Kim",
-            LastName = "Bale",
-            Age = 57
+            Id=3
         };
-        Update(disconnectedEmployee);
+        Remove(disconnectedEmployee);
 
     }
 
-    public static void Update(Employee employee)
+    public static void Remove(Employee employee)
     {
 
         var context = new ArtistsContext();
-        context.Employees.Update(employee);
+        context.Employees.Remove(employee);
         context.SaveChanges();
     }
 }
