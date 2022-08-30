@@ -8,17 +8,24 @@ class Program
 
         var disconnectedEmployee = new Employee
         {
-            Id=3
+            Id = 2,
+            FirstName = "Desmond",
+            LastName = "Paul",
+            Age = 23,
+            Albums = new List<Album>(){
+                new Album{ Title="Gone with the wind",Price=7000},
+                new Album{ Title="Pink roses", Price=2800}
+            }
         };
-        Remove(disconnectedEmployee);
+        UpdateExistingEmployees(disconnectedEmployee);
 
     }
 
-    public static void Remove(Employee employee)
+    public static void UpdateExistingEmployees(Employee employee)
     {
 
         var context = new ArtistsContext();
-        context.Employees.Remove(employee);
+        context.Employees.Update(employee);
         context.SaveChanges();
     }
 }
