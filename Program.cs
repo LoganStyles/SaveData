@@ -6,13 +6,22 @@ class Program
     public static void Main(string[] args)
     {
 
-        var disconnectedEmployee = new Employee
+        var addDisconnectedEmployee = new Employee
         {
-            FirstName = "Kim",
-            LastName = "Bale",
-            Age = 57
+            FirstName = "Femi",
+            LastName = "Balogun",
+            Age = 34
         };
-        Update(disconnectedEmployee);
+        Update(addDisconnectedEmployee);
+
+        var updateDisconnectedEmployee = new Employee
+        {
+            Id = 2,
+            FirstName = "Kim",
+            LastName = "James",
+            Age = 34
+        };
+        Update(addDisconnectedEmployee);
 
     }
 
