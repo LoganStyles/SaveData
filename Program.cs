@@ -6,13 +6,21 @@ class Program
     public static void Main(string[] args)
     {
 
+        var disconnectedEmployee = new Employee
+        {
+            FirstName = "Femi",
+            LastName = "Balogun",
+            Age = 34
+        };
+        Insert(disconnectedEmployee);
+
+    }
+
+    public static void Insert(object entity)
+    {
+
         var context = new ArtistsContext();
-
-        //fetch the first employee from the employees table
-        var employee = context.Employees.FirstOrDefault();
-        employee.FirstName="Mark";
-
-        //save all changes made in this context to the database
+        context.Add(entity);
         context.SaveChanges();
     }
 }
