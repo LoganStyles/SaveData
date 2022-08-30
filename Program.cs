@@ -11,7 +11,6 @@ class Program
             Id=3
         };
         Remove(disconnectedEmployee);
-
     }
 
     public static void Remove(Employee employee)
