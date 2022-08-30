@@ -21,7 +21,7 @@ class Program
             LastName = "James",
             Age = 34
         };
-        Update(addDisconnectedEmployee);
+        Update(updateDisconnectedEmployee);
 
     }
 
