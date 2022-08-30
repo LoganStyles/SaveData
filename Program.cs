@@ -8,10 +8,9 @@ class Program
 
         var disconnectedEmployee = new Employee
         {
-            Id = 2,
-            FirstName = "Femi",
-            LastName = "Balogun",
-            Age = 34
+            FirstName = "Kim",
+            LastName = "Bale",
+            Age = 57
         };
         Update(disconnectedEmployee);
 
