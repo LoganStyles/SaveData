@@ -16,11 +16,11 @@ class Program
 
     }
 
-    public static void Insert(object entity)
+    public static void Insert(Employee employee)
     {
 
         var context = new ArtistsContext();
-        context.Add(entity);
+        context.Employees.Add(employee);
         context.SaveChanges();
     }
 }
