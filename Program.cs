@@ -14,7 +14,6 @@ class Program
             Age = 34
         };
         Update(disconnectedEmployee);
-
     }
 
     public static void Update(Employee employee)
