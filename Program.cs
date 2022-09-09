@@ -19,7 +19,7 @@ class Program
     public static void Insert(Employee employee)
     {
 
-        var context = new ArtistsContext();
+        using var context = new ArtistsContext();
         context.Employees.Add(employee);
         context.SaveChanges();
     }
