@@ -24,7 +24,7 @@ class Program
     public static void UpdateExistingEmployees(Employee employee)
     {
 
-        var context = new ArtistsContext();
+        using var context = new ArtistsContext();
         context.Employees.Update(employee);
         context.SaveChanges();
     }
