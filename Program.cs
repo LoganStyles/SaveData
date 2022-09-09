@@ -16,7 +16,7 @@ class Program
     public static void Remove(Employee employee)
     {
 
-        var context = new ArtistsContext();
+        using var context = new ArtistsContext();
         context.Employees.Remove(employee);
         context.SaveChanges();
     }
