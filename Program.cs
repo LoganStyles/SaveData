@@ -7,7 +7,7 @@ class Program
     public static void Main(string[] args)
     {
 
-        var context = new ArtistsContext();
+        using var context = new ArtistsContext();
 
         //create new instance of employee
         var employee = new Employee { FirstName = "Susan", LastName = "Fredricks", Age = 28 };
