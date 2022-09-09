@@ -7,7 +7,7 @@ class Program
     {
 
         var disconnectedEmployee = new Employee { Id = 4, FirstName = "Femi", LastName = "Landon", Age = 34 };
-        var context = new ArtistsContext();
+        using var context = new ArtistsContext();
 
         //check its state
         Console.WriteLine("Employee {0} is in {1} state", 
