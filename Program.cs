@@ -9,7 +9,7 @@ class Program
 
         var context = new ArtistsContext();
 
-        //create new instance of employee together with albums
+        //create new graph of employee together with albums
         var employee = new Employee
         {
             FirstName = "Steven",
