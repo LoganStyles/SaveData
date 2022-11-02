@@ -7,34 +7,14 @@ class Program
     public static void Main(string[] args)
     {
 
-        //save the following data into the database
-        //DEPARTMENTS
-        //1,'Engineering','Fraser Jones'
-        //2,'Computer Science','Campbell rock'
-        /* 
-        INSTRUCTORS
-        blessing udoh,1
-        martin jeffries, 2
-        coleman bale,1
-
-        STUDENTS
-        Ferdinand, joe, 1
-        Regina, Queen, 2
-        Chiwendu, Felix, 2
-
-        COURSES
-
-        maths, 1
-        english, 2
-
-         */
-
+        //write code here
         var context = new SchoolContext();
 
-        var engineeringDepartment = new Department
+        //insert departments and instructors
+        var computerScience = new Department
         {
 
-            Title = "Chemical Engineering",
+            Title = "Computer Science",
             HOD = "Fraser Jones",
             Instructors = new List<Instructor>{
                 new Instructor { FirstName="blessing", LastName="Udoh"},
@@ -43,77 +23,87 @@ class Program
 
         };
 
-        var compSciDepartment = new Department
+        var businessManagement = new Department
         {
 
-            Title = "Computer Science",
-            HOD = "Campbell Rock",
+            Title = "Business Management",
+            HOD = "Jennifer Rock",
             Instructors = new List<Instructor>{
-                new Instructor { FirstName="martin", LastName="jeffrey"}
+                new Instructor { FirstName="Benedict", LastName="Okon"}
             }
 
         };
 
-        /*begin tracking the Department entity and 
-                any other reachable entities
-                */
-        context.Departments.Add(engineeringDepartment);
-        context.Departments.Add(compSciDepartment);
-
-        //courses
-        var maths = new Course { Title = "Maths", DepartmentCode = 1 };
-        var english = new Course { Title = "English", DepartmentCode = 2 };
-        var chemistry = new Course { Title = "Chemistry", DepartmentCode = 2 };
-
-        context.Courses.Add(maths);
-        context.Courses.Add(english);
-        context.Courses.Add(chemistry);
-
-        //students
-        var faith = new Student
+        var lawScience = new Department
         {
-            FirstName = "Faith",
+            Title = "Law Science",
+            HOD = "Philip Riddick",
+            Instructors = new List<Instructor>{
+                new Instructor { FirstName="karim", LastName="balogun"}
+            }
+        };
+
+        //track Department entity and any other reachable entities
+        context.Departments.Add(computerScience);
+        context.Departments.Add(businessManagement);
+        context.Departments.Add(lawScience);
+
+        //save departments & instructors
+        context.SaveChanges();
+
+        // insert courses
+        var infoSys = new Course { Title = "Information Systems", DepartmentCode = 1 };
+        var swe = new Course { Title = "Software Engineering", DepartmentCode = 1 };
+        var busLeadership = new Course { Title = "Business Leadership", DepartmentCode = 2 };
+        var digiBusiness = new Course { Title = "Digital Business", DepartmentCode = 2 };
+
+        // add courses to the context
+        context.Courses.Add(infoSys);
+        context.Courses.Add(swe);
+        context.Courses.Add(busLeadership);
+        context.Courses.Add(digiBusiness);
+
+        //save the courses
+        context.SaveChanges();
+
+        //Insert students with their related courses
+        //After the last SaveChanges() operation, the saved course Ids exist in the context.
+        var ferdinand = new Student
+        {
+            FirstName = "Ferdinand",
             LastName = "Mbotidem",
             DepartmentCode = 1,
             StudentCourses = new List<StudentCourse>{
-                new StudentCourse{CourseId = maths.Id}
+                new StudentCourse{CourseId = infoSys.Id}
             }
         };
 
-        var martha = new Student
+        var margaret = new Student
         {
-            FirstName = "Martha",
-            LastName = "Joel",
+            FirstName = "Margaret",
+            LastName = "Olorunbanjo",
             DepartmentCode = 2,
             StudentCourses = new List<StudentCourse>{
-                new StudentCourse {CourseId=english.Id},
-                new StudentCourse {CourseId=chemistry.Id}
+                new StudentCourse {CourseId=busLeadership.Id},
+                new StudentCourse {CourseId=digiBusiness.Id}
             }
         };
 
-        context.Students.Add(faith);
-        context.Students.Add(martha);
+        //add students & their courses to the context
+        context.Students.Add(ferdinand);
+        context.Students.Add(margaret);
 
-        //student courses
-        // var faithStudentId = context.Students.SingleOrDefault(stud => stud.LastName.Equals(faith.LastName)).Id;
+        //save students & their courses
+        context.SaveChanges();
 
-        // var faithCourses = ;
-
-        // var marthaCourses = new StudentCourse
-        // {
-        //     StudentId = martha.Id,
-        //     CourseId = chemistry.Id
-        // };
-
-        // context.StudentCourses.Add(faithCourses);
-        // context.StudentCourses.Add(marthaCourses);
-
-        //save all changes made in this context to the database
+        //delete the law science department & all related entities
+        context.Departments.Remove(lawScience);
         context.SaveChanges();
 
         //fetch & display data
+        Console.WriteLine("---DEPARTMENTS---");
+        Console.WriteLine("TITLE \t\t\tHOD");
         var departments = context.Departments.ToList();
-        Console.WriteLine("DEPARTMENTS \tHOD");
 
         foreach (var department in departments)
         {
@@ -121,26 +111,45 @@ class Program
         }
 
 
-        var instructors = context.Instructors.ToList();
+        Console.WriteLine("\n---INSTRUCTORS---");
         Console.WriteLine("FIRSTNAME \tLASTNAME \tDEPARTMENT");
+        var instructors = context.Instructors.ToList();
 
         foreach (var instructor in instructors)
         {
-            Console.WriteLine($"{instructor.FirstName} \t{instructor.LastName} \t{instructor.Department.Title}");
+            Console.WriteLine($"{instructor.FirstName} \t{instructor.LastName} \t\t{instructor.Department.Title}");
         }
 
-        var students = context.Students
-                    .Join(context.Departments, stud => stud.DepartmentCode, dept => dept.Id, (studs, depts) => new
-                    {
-                        FirstName = studs.FirstName,
-                        LastName = studs.LastName,
-                        Department = depts.Title
-                    });
+
+        Console.WriteLine("\n---STUDENTS---");
         Console.WriteLine("FIRSTNAME \tLASTNAME \tDEPARTMENT");
+        var students = context.Students
+        .Join(context.Departments, stud => stud.DepartmentCode, dept => dept.Id,
+        (studs, depts) => new
+        {
+            FirstName = studs.FirstName,
+            LastName = studs.LastName,
+            Department = depts.Title
+        });
 
         foreach (var student in students)
         {
             Console.WriteLine($"{student.FirstName} \t{student.LastName} \t{student.Department}");
+        }
+
+        Console.WriteLine("\n---COURSES---");
+        Console.WriteLine("TITLE \t\t\tDEPARTMENT");
+        var courses = context.Courses
+        .Join(context.Departments, co => co.DepartmentCode, dept => dept.Id,
+        (cos, depts) => new
+        {
+            Title = cos.Title,
+            DepartmentTitle = depts.Title
+        });
+
+        foreach (var course in courses)
+        {
+            Console.WriteLine($"{course.Title} \t{course.DepartmentTitle}");
         }
     }
 }
