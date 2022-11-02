@@ -7,7 +7,6 @@ class Program
     public static void Main(string[] args)
     {
 
-        //write code here
         var context = new SchoolContext();
 
         //insert departments and instructors
@@ -81,7 +80,7 @@ class Program
         var margaret = new Student
         {
             FirstName = "Margaret",
-            LastName = "Olorunbanjo",
+            LastName = "Olorunisola",
             DepartmentCode = 2,
             StudentCourses = new List<StudentCourse>{
                 new StudentCourse {CourseId=busLeadership.Id},
@@ -89,14 +88,14 @@ class Program
             }
         };
 
-        //add students & their courses to the context
+        //add students to the context
         context.Students.Add(ferdinand);
         context.Students.Add(margaret);
 
-        //save students & their courses
+        //save students
         context.SaveChanges();
 
-        //delete the law science department & all related entities
+        //delete the law science department & related instructors
         context.Departments.Remove(lawScience);
         context.SaveChanges();
 
@@ -120,6 +119,20 @@ class Program
             Console.WriteLine($"{instructor.FirstName} \t{instructor.LastName} \t\t{instructor.Department.Title}");
         }
 
+        Console.WriteLine("\n---COURSES---");
+        Console.WriteLine("TITLE \t\t\tDEPARTMENT");
+        var courses = context.Courses
+        .Join(context.Departments, co => co.DepartmentCode, dept => dept.Id,
+        (cos, depts) => new
+        {
+            Title = cos.Title,
+            DepartmentTitle = depts.Title
+        });
+
+        foreach (var course in courses)
+        {
+            Console.WriteLine($"{course.Title} \t{course.DepartmentTitle}");
+        }
 
         Console.WriteLine("\n---STUDENTS---");
         Console.WriteLine("FIRSTNAME \tLASTNAME \tDEPARTMENT");
@@ -137,19 +150,6 @@ class Program
             Console.WriteLine($"{student.FirstName} \t{student.LastName} \t{student.Department}");
         }
 
-        Console.WriteLine("\n---COURSES---");
-        Console.WriteLine("TITLE \t\t\tDEPARTMENT");
-        var courses = context.Courses
-        .Join(context.Departments, co => co.DepartmentCode, dept => dept.Id,
-        (cos, depts) => new
-        {
-            Title = cos.Title,
-            DepartmentTitle = depts.Title
-        });
-
-        foreach (var course in courses)
-        {
-            Console.WriteLine($"{course.Title} \t{course.DepartmentTitle}");
-        }
+        
     }
 }
