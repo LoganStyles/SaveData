@@ -66,7 +66,7 @@ class Program
         context.SaveChanges();
 
         //Insert students with their related courses
-        //After the last SaveChanges() operation, the saved course Ids exist in the context.
+        //Note: After the last SaveChanges() operation, the saved course Ids exist in the context.
         var ferdinand = new Student
         {
             FirstName = "Ferdinand",
