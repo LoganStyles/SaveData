@@ -1,5 +1,4 @@
-﻿
-using SaveData;
+﻿using SaveData;
 
 class Program
 {
