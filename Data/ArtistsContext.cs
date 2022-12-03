@@ -21,7 +21,7 @@ namespace SaveData
                         Console.WriteLine,
                         new[] { DbLoggerCategory.Database.Command.Name },
                         Microsoft.Extensions.Logging.LogLevel.Information
-                    );
+                    ).EnableSensitiveDataLogging();
             }
         }
 
