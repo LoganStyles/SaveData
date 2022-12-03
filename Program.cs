@@ -29,5 +29,20 @@ class Program
         context.Employees.Add(employee);
         //save all changes made in this context to the database
         context.SaveChanges();
+
+        //display all employees and albums
+        var allEmployees = context.Employees.ToList();
+        Console.WriteLine("Id \tFirstName \tLastName \tAge");
+        foreach (var emp in allEmployees)
+        {
+            Console.WriteLine($"{emp.Id}\t{emp.FirstName}\t\t{emp.LastName}\t\t{emp.Age}");
+        }
+        
+        var allAlbums = context.Albums.ToList();
+        Console.WriteLine("Id \tTitle \t\t\tPrice \tEmployeeId");
+        foreach (var alb in allAlbums)
+        {
+            Console.WriteLine($"{alb.Id}\t{alb.Title}\t\t{alb.Price}\t\t{alb.EmployeeId}");
+        }
     }
 }
